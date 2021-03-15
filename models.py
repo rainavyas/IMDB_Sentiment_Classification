@@ -25,7 +25,7 @@ class SequenceClassifier(nn.Module):
     '''
     Sentence Level classification using Electra for encoding sentence
     '''
-    def __init__(self, hidden_size=768, classes==2):
+    def __init__(self, hidden_size=768, classes=2):
         super().__init__()
         self.electra = ElectraModel.from_pretrained('google/electra-base-discriminator')
         self.classifier = ClassificationHead(hidden_size, classes)
