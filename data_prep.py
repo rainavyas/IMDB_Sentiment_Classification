@@ -55,8 +55,8 @@ def get_data(base_dir):
     # Tokenize and prep input tensors
     tokenizer = ElectraTokenizer.from_pretrained('google/electra-base-discriminator')
     encoded_inputs = tokenizer(review_list, padding=True, truncation=True, return_tensors="pt")
-    ids = encoded_inputs('input_ids')
-    mask = encoded_inputs('attention_mask')
+    ids = encoded_inputs['input_ids']
+    mask = encoded_inputs['attention_mask']
 
     return ids, mask, labels
 
