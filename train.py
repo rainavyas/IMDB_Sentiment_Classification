@@ -10,7 +10,7 @@ from data_prep import get_train, get_test
 import sys
 import os
 import argparse
-from tools import AverageMeter, accuracy, get_default_device
+from tools import AverageMeter, accuracy_topk, get_default_device
 from models import SequenceClassifier
 
 def train(train_loader, model, criterion, optimizer, epoch, device, print_freq=25):
