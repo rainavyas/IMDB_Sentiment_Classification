@@ -112,7 +112,7 @@ if __name__ == "__main__":
 
     # Load the data as tensors
     input_ids_train, mask_train, labels_train = get_train()
-    input_ids_val, mask_val, labels_val = get_val()
+    input_ids_val, mask_val, labels_val = get_test()
 
     # Use dataloader to handle batches
     train_ds = TensorDataset(input_ids_train, mask_train, labels_train)
