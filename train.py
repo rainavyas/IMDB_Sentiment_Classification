@@ -6,7 +6,7 @@ import torch
 from torch.utils.data import TensorDataset
 from torch.utils.data import DataLoader
 from transformers import ElectraTokenizer
-from data_prep import get_train, get_val
+from data_prep import get_train, get_test
 import sys
 import os
 import argparse
