@@ -4,7 +4,7 @@ Use the Electra Language Model to perform sentiment classification on the IMDB d
 
 # Requirements
 
-## Installation with PyPi
+## Installation with PyPI
 
 pip install torch, torchvision
 
