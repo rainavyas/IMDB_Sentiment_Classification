@@ -17,7 +17,7 @@ class ClassificationHead(nn.Module):
         m = nn.GELU()
         x = m(x) # gelu used by electra authors
         x = self.dropout(x)
-        x = out_proj(x)
+        x = self.out_proj(x)
         return x
 
 
