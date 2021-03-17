@@ -3,6 +3,7 @@ Prepare the IMDB training data as tokenized pytorch
 ids tensor and attention mask
 '''
 import torch
+import torch.nn as nn
 import scandir
 from transformers import ElectraTokenizer
 

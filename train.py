@@ -3,6 +3,7 @@ Train an Electra-based classifer on the IMDB dataset
 '''
 
 import torch
+import torch.nn as nn
 from torch.utils.data import TensorDataset
 from torch.utils.data import DataLoader
 from transformers import ElectraTokenizer
