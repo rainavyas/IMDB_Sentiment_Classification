@@ -128,7 +128,7 @@ if __name__ == "__main__":
     model.to(device)
 
     # Optimizer
-    optimizer = torch.optim.AdamW(model.parameters(), lr=lr, 1*e-8)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=lr, eps=1e-8)
 
     # Scheduler
     scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones=[sch])
