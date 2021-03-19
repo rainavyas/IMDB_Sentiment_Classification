@@ -6,13 +6,14 @@ import torch
 import torch.nn as nn
 from torch.utils.data import TensorDataset
 from torch.utils.data import DataLoader
-from transformers import ElectraTokenizer
+from transformers import ElectraTokenizer, AdamW
 from data_prep import get_train, get_test
 import sys
 import os
 import argparse
 from tools import AverageMeter, accuracy_topk, get_default_device
 from models import SequenceClassifier
+
 
 def train(train_loader, model, criterion, optimizer, epoch, device, print_freq=25):
     '''
@@ -127,7 +128,7 @@ if __name__ == "__main__":
     model.to(device)
 
     # Optimizer
-    optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=0.9, nesterov=True)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=lr, 1*e-8)
 
     # Scheduler
     scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones=[sch])
