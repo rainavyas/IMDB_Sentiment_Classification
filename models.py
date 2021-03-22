@@ -1,4 +1,4 @@
-from transformers import ElectraModel, BertModel
+from transformers import ElectraModel, BertModel, RobertaModel
 import torch
 import torch.nn as nn
 
@@ -50,6 +50,28 @@ class BertSequenceClassifier(nn.Module):
     def __init__(self, hidden_size=768, classes=2):
         super().__init__()
         self.bert = BertModel.from_pretrained('google/bert-base-discriminator')
+        self.classifier = ClassificationHead(hidden_size, classes)
+
+    def forward(self, input_ids, attention_mask):
+        '''
+        input_ids = [N x L], containing sequence of ids of words after tokenization
+        attention_mask = [N x L], mask for attention
+
+        N = batch size
+        L = maximum sentence length
+        '''
+        all_layers_hidden_states = self.bert(input_ids, attention_mask)
+        final_layer = all_layers_hidden_states[0]
+        logits = self.classifier(final_layer)
+        return logits
+
+class RobertaSequenceClassifier(nn.Module):
+    '''
+    Sentence Level classification using Roberta for encoding sentence
+    '''
+    def __init__(self, hidden_size=768, classes=2):
+        super().__init__()
+        self.bert = RobertaModel.from_pretrained('roberta-base')
         self.classifier = ClassificationHead(hidden_size, classes)
 
     def forward(self, input_ids, attention_mask):

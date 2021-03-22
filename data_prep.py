@@ -43,9 +43,9 @@ def get_reviews(dir):
 
 def get_data(base_dir, arch):
 
-    allowed_arch = ['electra', 'bert']
+    allowed_arch = ['electra', 'bert', 'roberta']
     if arch not in allowed_arch:
-        raise Exception('Invalid architecture, only allowed: electra or bert')
+        raise Exception('Invalid architecture, only allowed: electra, bert, roberta')
     neg = base_dir + '/neg'
     pos = base_dir + '/pos'
 
@@ -58,7 +58,10 @@ def get_data(base_dir, arch):
     labels = torch.LongTensor(labels)
 
     # Tokenize and prep input tensors
-    tokenize_location = 'google/'+arch+'-base-discriminator'
+    if arch == 'roberta':
+        tokenize_location = 'roberta-base'
+    else:
+        tokenize_location = 'google/'+arch+'-base-discriminator'
     tokenizer = ElectraTokenizer.from_pretrained(tokenize_location)
     encoded_inputs = tokenizer(review_list, padding=True, truncation=True, return_tensors="pt")
     ids = encoded_inputs['input_ids']
