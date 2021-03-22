@@ -147,6 +147,6 @@ if __name__ == "__main__":
         # evaluate on validation set
         eval(val_dl, model, criterion, device)
 
-# Save the trained model
-state = model.state_dict()
-torch.save(state, out_file)
+    # Save the trained model
+    state = model.state_dict()
+    torch.save(state, out_file)
