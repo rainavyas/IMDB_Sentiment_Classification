@@ -35,7 +35,7 @@ def get_reviews(dir):
     review_files = [f.name for f in scandir.scandir(dir)]
     review_list = []
     for review_file in review_files:
-        with open(dir+'/'+review_file, "r") as f:
+        with open(dir+'/'+review_file, "r", encoding="utf8") as f:
             text = f.read()
             text = text.rstrip('\n')
         review_list.append(text)
