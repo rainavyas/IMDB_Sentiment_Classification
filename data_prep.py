@@ -5,7 +5,7 @@ ids tensor and attention mask
 import torch
 import torch.nn as nn
 import scandir
-from transformers import ElectraTokenizer
+from transformers import ElectraTokenizer, BertTokenizer
 
 _DESCRIPTION = """\
 Large Movie Review Dataset.
@@ -41,7 +41,11 @@ def get_reviews(dir):
         review_list.append(text)
     return review_list
 
-def get_data(base_dir):
+def get_data(base_dir, arch):
+
+    allowed_arch = ['electra', 'bert']
+    if arch not in allowed_arch:
+        raise Exception('Invalid architecture, only allowed: electra or bert')
     neg = base_dir + '/neg'
     pos = base_dir + '/pos'
 
@@ -54,17 +58,18 @@ def get_data(base_dir):
     labels = torch.LongTensor(labels)
 
     # Tokenize and prep input tensors
-    tokenizer = ElectraTokenizer.from_pretrained('google/electra-base-discriminator')
+    tokenize_location = 'google/'+arch+'-base-discriminator'
+    tokenizer = ElectraTokenizer.from_pretrained(tokenize_location)
     encoded_inputs = tokenizer(review_list, padding=True, truncation=True, return_tensors="pt")
     ids = encoded_inputs['input_ids']
     mask = encoded_inputs['attention_mask']
 
     return ids, mask, labels
 
-def get_train():
+def get_train(arch):
     base_dir = '../data/train'
-    return get_data(base_dir)
+    return get_data(base_dir, arch)
 
-def get_test():
+def get_test(arch):
     base_dir = '../data/test'
-    return get_data(base_dir)
+    return get_data(base_dir, arch)

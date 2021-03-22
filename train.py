@@ -6,13 +6,13 @@ import torch
 import torch.nn as nn
 from torch.utils.data import TensorDataset
 from torch.utils.data import DataLoader
-from transformers import ElectraTokenizer, AdamW
+from transformers import AdamW
 from data_prep import get_train, get_test
 import sys
 import os
 import argparse
 from tools import AverageMeter, accuracy_topk, get_default_device
-from models import SequenceClassifier
+from models import ElectraSequenceClassifier, BertSequenceClassifier
 
 
 def train(train_loader, model, criterion, optimizer, epoch, device, print_freq=25):
@@ -87,6 +87,7 @@ if __name__ == "__main__":
     # Get command line arguments
     commandLineParser = argparse.ArgumentParser()
     commandLineParser.add_argument('OUT', type=str, help='Specify output th file')
+    commandLineParser.add_argument('ARCH', type=str, help='electra or bert')
     commandLineParser.add_argument('--B', type=int, default=16, help="Specify batch size")
     commandLineParser.add_argument('--epochs', type=int, default=2, help="Specify epochs")
     commandLineParser.add_argument('--lr', type=float, default=0.000001, help="Specify learning rate")
@@ -95,6 +96,7 @@ if __name__ == "__main__":
 
     args = commandLineParser.parse_args()
     out_file = args.OUT
+    args.arch = args.ARCH
     batch_size = args.B
     epochs = args.epochs
     lr = args.lr
@@ -113,8 +115,8 @@ if __name__ == "__main__":
     device = get_default_device()
 
     # Load the data as tensors
-    input_ids_train, mask_train, labels_train = get_train()
-    input_ids_val, mask_val, labels_val = get_test()
+    input_ids_train, mask_train, labels_train = get_train(arch)
+    input_ids_val, mask_val, labels_val = get_test(arch)
 
     # Use dataloader to handle batches
     train_ds = TensorDataset(input_ids_train, mask_train, labels_train)
@@ -124,7 +126,12 @@ if __name__ == "__main__":
     val_dl = DataLoader(val_ds, batch_size=batch_size)
 
     # Initialise classifier
-    model = SequenceClassifier()
+    if arch == 'electra':
+        model = ElectraSequenceClassifier()
+    elif arch == 'bert':
+        model = BertSequenceClassifier()
+    else:
+        raise Exception("Something has gone wrong with architecture definition.")
     model.to(device)
 
     # Optimizer
