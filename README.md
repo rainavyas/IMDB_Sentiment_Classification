@@ -1,6 +1,6 @@
 # Objective
 
-Use the Electra Language Model to perform sentiment classification on the IMDB dataset
+Finetune existing encoders to perform sentiment classification on the IMDB dataset
 
 # Requirements
 
@@ -16,9 +16,12 @@ pip install scandir
 
 # Experimental Results
 
-95.7% accuracy on Test dataset (25,000 data points)
+| Model Architecture | Test Accuracy (%) |
+| ----------------- | :-----------------: |
+Electra (base) encoder + classification head | 95.7 |
+BERT (base) encoder + classification head | - |
 
-## Training Details
+### Electra Training Details
 
 - Initialise Electra encoder with _Electra Base_
 - Batch Size = 8
