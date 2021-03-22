@@ -16,6 +16,15 @@ pip install scandir
 
 # Experimental Results
 
+95.7% accuracy on Test dataset (25,000 data points)
+
+## Training Details
+
+- Initialise Electra encoder with _Electra Base_
+- Batch Size = 8
+- Epochs = 2
+- Learning Rate = 1e-5
+
 
 
 
