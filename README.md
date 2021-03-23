@@ -14,6 +14,8 @@ pip install transformers
 
 pip install scandir
 
+pip install sentencepiece
+
 # Experimental Results
 
 | Model Architecture | Test Accuracy (%) |
