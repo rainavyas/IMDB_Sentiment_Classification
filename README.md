@@ -31,7 +31,7 @@ _python ./train.py xlnet_trained.th xlnet --B=8 --lr=0.00001 --epochs=2_
 ELECTRA (base) encoder + classification head | 95.6 |
 BERT (base-uncased) encoder + classification head | 93.8 |
 RoBERTta (base) encoder + classification head | 95.4 |
-XLNet (base) encoder + classification head | 95.9 |
+XLNet (base) encoder + classification head | 95.0 |
 
 Note that the XLNet tokenizer was adapted to force truncation to 512 tokens (to be comparable to other models)
 
