@@ -19,11 +19,12 @@ pip install scandir
 | Model Architecture | Test Accuracy (%) |
 | ----------------- | :-----------------: |
 Electra (base) encoder + classification head | 95.7 |
-BERT (base) encoder + classification head | - |
+Bert (base-uncased) encoder + classification head | - |
+Roberta (base) encoder + classification head | - |
 
-### Electra Training Details
+### Training Details
 
-- Initialise Electra encoder with _Electra Base_
+- Initialise encoder with _<model>_
 - Batch Size = 8
 - Epochs = 2
 - Learning Rate = 1e-5
