@@ -73,10 +73,8 @@ def get_data(base_dir, arch):
 
     if arch == 'xlnet':
         # No truncation in xlnet (no max size) so do it manually for cuda memory sake
-        print("ids", ids.size())
-        print("mask", mask.size())
-        ids = ids[:,0:512,:]
-        mask = mask[:,0:512,:]
+        ids = ids[:,:512]
+        mask = mask[:,:512]
 
     return ids, mask, labels
 
