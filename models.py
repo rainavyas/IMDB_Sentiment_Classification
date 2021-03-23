@@ -1,4 +1,4 @@
-from transformers import ElectraModel, BertForPreTraining, RobertaModel, XLNetModel
+from transformers import ElectraModel, BertModel, RobertaModel, XLNetModel
 import torch
 import torch.nn as nn
 
@@ -49,7 +49,7 @@ class BertSequenceClassifier(nn.Module):
     '''
     def __init__(self, hidden_size=768, classes=2):
         super().__init__()
-        self.bert = BertForPreTraining.from_pretrained('bert-base-uncased')
+        self.bert = BertModel.from_pretrained('bert-base-uncased')
         self.classifier = nn.Linear(hidden_size, classes)
 
     def forward(self, input_ids, attention_mask):
