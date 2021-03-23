@@ -96,7 +96,7 @@ if __name__ == "__main__":
 
     args = commandLineParser.parse_args()
     out_file = args.OUT
-    args.arch = args.ARCH
+    arch = args.ARCH
     batch_size = args.B
     epochs = args.epochs
     lr = args.lr
