@@ -25,6 +25,8 @@ BERT (base-uncased) encoder + classification head | 93.8 |
 RoBERTta (base) encoder + classification head | 95.4 |
 XLNet (base) encoder + classification head | - |
 
+Note that the XLNet tokenizer was adapted to force truncation to 512 tokens (to be comparable to other models)
+
 ### Training Details
 
 - Initialise encoder with _model_
