@@ -68,13 +68,11 @@ def get_data(base_dir, arch):
         tokenizer = XLNetTokenizer.from_pretrained('xlnet-base-cased')
 
     encoded_inputs = tokenizer(review_list, padding=True, truncation=True, return_tensors="pt")
+    if arch == 'xlnet':
+        encoded_inputs = tokenizer(review_list, padding=True, max_length=512, truncation=True, return_tensors="pt")
+
     ids = encoded_inputs['input_ids']
     mask = encoded_inputs['attention_mask']
-
-    if arch == 'xlnet':
-        # No truncation in xlnet (no max size) so do it manually for cuda memory sake
-        ids = ids[:,:512]
-        mask = mask[:,:512]
 
     return ids, mask, labels
 
