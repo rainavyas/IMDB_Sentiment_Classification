@@ -93,7 +93,7 @@ class XlnetSequenceClassifier(nn.Module):
     '''
     def __init__(self, hidden_size=768, classes=2):
         super().__init__()
-        self.xlnet = XLNetModel.from_pretrained('xlnet-base-uncased')
+        self.xlnet = XLNetModel.from_pretrained('xlnet-base-cased')
         self.dropout = nn.Dropout(0.5)
         self.layer = nn.Linear(hidden_size, hidden_size)
         self.classifier = nn.Linear(hidden_size, classes)
