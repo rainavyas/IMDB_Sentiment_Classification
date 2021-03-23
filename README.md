@@ -27,7 +27,7 @@ XLNet (base) encoder + classification head | - |
 
 ### Training Details
 
-- Initialise encoder with _<model>_
+- Initialise encoder with _model_
 - Batch Size = 8
 - Epochs = 2
 - Learning Rate = 1e-5
