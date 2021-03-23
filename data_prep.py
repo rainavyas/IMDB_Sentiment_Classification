@@ -5,7 +5,7 @@ ids tensor and attention mask
 import torch
 import torch.nn as nn
 import scandir
-from transformers import ElectraTokenizer, BertTokenizer
+from transformers import ElectraTokenizer, BertTokenizer, RobertaTokenizer
 
 _DESCRIPTION = """\
 Large Movie Review Dataset.
@@ -58,11 +58,13 @@ def get_data(base_dir, arch):
     labels = torch.LongTensor(labels)
 
     # Tokenize and prep input tensors
-    if arch == 'roberta':
-        tokenize_location = 'roberta-base'
-    else:
-        tokenize_location = 'google/'+arch+'-base-discriminator'
-    tokenizer = ElectraTokenizer.from_pretrained(tokenize_location)
+    if arch == 'electra':
+        tokenizer = ElectraTokenizer.from_pretrained('google/electra-base-discriminator')
+    elif arch == 'bert':
+        tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+    elif arch == 'roberta':
+        tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
+
     encoded_inputs = tokenizer(review_list, padding=True, truncation=True, return_tensors="pt")
     ids = encoded_inputs['input_ids']
     mask = encoded_inputs['attention_mask']
