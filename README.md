@@ -18,9 +18,9 @@ pip install scandir
 
 | Model Architecture | Test Accuracy (%) |
 | ----------------- | :-----------------: |
-Electra (base) encoder + classification head | 95.6 |
-Bert (base-uncased) encoder + classification head | - |
-Roberta (base) encoder + classification head | - |
+ELECTRA (base) encoder + classification head | 95.6 |
+BERT (base-uncased) encoder + classification head | - |
+RoBERTta (base) encoder + classification head | - |
 XLNet (base) encoder + classification head | - |
 
 ### Training Details
