@@ -5,7 +5,7 @@ ids tensor and attention mask
 import torch
 import torch.nn as nn
 import scandir
-from transformers import ElectraTokenizer, BertTokenizer, RobertaTokenizer
+from transformers import ElectraTokenizer, BertTokenizer, RobertaTokenizer, XLNetTokenizer
 
 _DESCRIPTION = """\
 Large Movie Review Dataset.
@@ -43,7 +43,7 @@ def get_reviews(dir):
 
 def get_data(base_dir, arch):
 
-    allowed_arch = ['electra', 'bert', 'roberta']
+    allowed_arch = ['electra', 'bert', 'roberta', 'xlnet']
     if arch not in allowed_arch:
         raise Exception('Invalid architecture, only allowed: electra, bert, roberta')
     neg = base_dir + '/neg'
@@ -64,6 +64,8 @@ def get_data(base_dir, arch):
         tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     elif arch == 'roberta':
         tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
+    elif arch == 'xlnet':
+        tokenizer = XLNetTokenizer.from_pretrained('xlnet-base-uncased')
 
     encoded_inputs = tokenizer(review_list, padding=True, truncation=True, return_tensors="pt")
     ids = encoded_inputs['input_ids']

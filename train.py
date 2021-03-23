@@ -12,7 +12,7 @@ import sys
 import os
 import argparse
 from tools import AverageMeter, accuracy_topk, get_default_device
-from models import ElectraSequenceClassifier, BertSequenceClassifier, RobertaSequenceClassifier
+from models import ElectraSequenceClassifier, BertSequenceClassifier, RobertaSequenceClassifier, XlnetSequenceClassifier
 
 
 def train(train_loader, model, criterion, optimizer, epoch, device, print_freq=25):
@@ -87,7 +87,7 @@ if __name__ == "__main__":
     # Get command line arguments
     commandLineParser = argparse.ArgumentParser()
     commandLineParser.add_argument('OUT', type=str, help='Specify output th file')
-    commandLineParser.add_argument('ARCH', type=str, help='electra, bert, roberta')
+    commandLineParser.add_argument('ARCH', type=str, help='electra, bert, roberta, xlnet')
     commandLineParser.add_argument('--B', type=int, default=16, help="Specify batch size")
     commandLineParser.add_argument('--epochs', type=int, default=2, help="Specify epochs")
     commandLineParser.add_argument('--lr', type=float, default=0.000001, help="Specify learning rate")
@@ -132,6 +132,8 @@ if __name__ == "__main__":
         model = BertSequenceClassifier()
     elif arch == 'roberta':
         model = RobertaSequenceClassifier()
+    elif arch == 'xlnet':
+        model = XlnetSequenceClassifier()
     else:
         raise Exception("Something has gone wrong with architecture definition.")
     model.to(device)
